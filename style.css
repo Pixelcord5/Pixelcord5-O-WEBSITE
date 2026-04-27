@@ -1,0 +1,61 @@
+ body
+ { color: black; 
+}
+
+body{
+  font-family: "Comic Sans MS";
+}
+
+  h1 { color: black;
+ }
+
+h1 {
+  font-family: "Comic Sans MS";
+}
+
+h2 { color: black;
+ }
+
+h2 {
+  font-family: "Comic Sans MS";
+}
+
+h3 { color: black;
+ }
+
+h3 {
+  font-family: "Comic Sans MS";
+}
+
+h4 { color: black;
+ }
+
+h4 {
+  font-family: "Comic Sans MS";
+}
+.big-btn {
+    font-size: 28px;
+    padding: 18px 45px;
+}
+
+.container {
+    display: flex;
+    gap: px;
+    align-items: flex-start;
+}
+
+.video iframe {
+    width: 300px;
+    height: 170px;
+}
+
+.gallery img {
+    width: 150px;
+    margin: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+}
