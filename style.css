@@ -1,8 +1,5 @@
- body
- { color: black; 
-}
-
-body{
+body {
+  color: black;
   font-family: "Comic Sans MS";
 }
 
@@ -40,7 +37,7 @@ h4 {
 
 .container {
     display: flex;
-    gap: px;
+    gap: 20px;
     align-items: flex-start;
 }
 
@@ -58,5 +55,32 @@ h4 {
 
 .gallery img:hover {
     transform: scale(1.1);
+}
+
+button{
+  background-color: rgb(255, 255, 241);
+  color: black;
+  transition-duration: 0.4s;
+  border-radius: 12px;
+}
+
+button:hover{
+  background-color: black;
+  color: rgb(255, 255, 241);
+}
+#musicBtn{
+   float: right;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #0033cc;
+}
+
+.video-box {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* space between video and button */
 }
 
