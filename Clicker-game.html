@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>Clicker Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div style="text-align:center;">
+
+  <h1>🍿 Clicker Game</h1>
+
+  <p>Score: <span id="score">0</span></p>
+
+  <br><br>
+
+  <a href="index.html">
+    <button>⬅ Back</button>
+  </a>
+
+
+</div>
+<p> .</p>
+<audio id="clickSound" src="click.wav"></audio>
+<div style="text-align:center;">
+<button onclick="clickGame()" style="font-size:30px; padding:20px 40px;">
+  CLICK ME
+</button>
+</div>
+<script>
+ let sound = document.getElementById("clickSound");
+
+function clickGame() {
+  score++;
+  document.getElementById("score").innerText = score;
+
+  sound.currentTime = 0; // restart sound fast
+  sound.play();
+
+  localStorage.setItem("score", score);
+}
+</script>
+<script>
+let score = 0;
+let btn = document.getElementById("btn");
+
+/* Click = score */
+function clickGame() {
+  score++;
+  document.getElementById("score").innerText = score;
+
+  // little "pop" on click
+  btn.style.position = "relative";
+  btn.style.top = "-10px";
+
+  setTimeout(() => {
+    btn.style.top = "0px";
+  }, 100);
+}
+
+/* Hover = popcorn bounce */
+btn.onmouseover = function() {
+  btn.style.position = "relative";
+  btn.style.top = "-8px";
+};
+
+btn.onmouseout = function() {
+  btn.style.top = "0px";
+};
+</script>
+<script>
+let score = localStorage.getItem("score")
+  ? parseInt(localStorage.getItem("score"))
+  : 0;
+
+document.getElementById("score").innerText = score;
+
+function clickGame() {
+  score++;
+  document.getElementById("score").innerText = score;
+
+  // SAVE score
+  localStorage.setItem("score", score);
+}
+</script>
+
+</body>
+</html>
