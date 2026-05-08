@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spacebar Clicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+  body{
+    background:rgb(255, 255, 255);
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
+
+.game-box{
+    background:#fefbfb;
+    width:700px;
+    margin:80px auto;
+    padding:50px;
+    border-radius:30px;
+    border:8px solid rgb(0, 0, 0);
+}
+
+h1{
+    
+    color:rgb(0, 0, 0);
+}
+
+p{
+   color:rgb(0, 0, 0);
+   font-size:25px;
+}
+
+#score{
+    font-size:90px;
+    margin-top:20px;
+    color:rgb(0, 0, 0);
+}
+
+.back-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    color:white;
+    text-decoration:none;
+    background:#222;
+    padding:15px 25px;
+    border-radius:20px;
+    font-size:35px;
+
+}
+footer{
+    color:black;
+}
+
+@media (max-width: 760px) {
+    .game-box{
+        width: min(90vw, 700px);
+        margin: 40px auto;
+        padding: 35px;
+    }
+
+    #score{
+        font-size:70px;
+    }
+
+    .back-btn{
+        font-size:28px;
+        padding:12px 22px;
+    }
+}
+
+@media (max-width: 500px) {
+    .game-box{
+        width: 90vw;
+        margin: 30px auto;
+        padding: 28px;
+    }
+
+    #score{
+        font-size:56px;
+    }
+
+    .back-btn{
+        left:10px;
+        top:10px;
+        font-size:20px;
+        padding:10px 16px;
+    }
+}
+
+   </style>
+</head>
+
+<body>
+
+    <a href="spacb.html" class="back-btn">⬅ Back</a>
+
+    <div class="game-box">
+
+        <h1>SPACEBAR CLICKER</h1>
+
+        <p>Press SPACE!</p>
+
+        <div id="score">0</div>
+
+    </div>
+
+    <footer>
+        Pixelcord5 :0 2026
+    </footer>
+
+
+    <script>
+
+        let score = 0;
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.code === "Space") {
+
+                score++;
+
+                document.getElementById("score").innerText = score;
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
