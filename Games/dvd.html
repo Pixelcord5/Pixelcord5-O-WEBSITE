@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixelcord5 :O 2026</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      height: 100%;
+      font-family: 'Orbitron', monospace;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background: rgba(255, 0, 68, 0.8);
+      border: 2px solid #ff0044;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
+      font-family: 'Orbitron', monospace;
+      transition: 0.2s;
+    }
+
+    .back-button:hover {
+      background: #ff0044;
+      box-shadow: 0 0 15px #ff0044;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<button class="back-button" onclick="window.location.href='spacb.html'">
+  BACK
+</button>
+
+<canvas id="screen"></canvas>
+
+<script>
+const canvas = document.getElementById("screen");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const text = "Pixelcord5 :O 2026";
+
+let x = 100;
+let y = 100;
+
+let dx = 3;
+let dy = 3;
+
+let size = 42;
+
+let color = "#ff0044";
+
+let hits = 0;
+
+const particles = [];
+
+function randomColor() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function createParticle(px, py) {
+  return {
+    x: px,
+    y: py,
+    dx: (Math.random() - 0.5) * 10,
+    dy: (Math.random() - 0.5) * 10,
+    size: Math.random() * 5 + 2,
+    life: 60
+  };
+}
+
+function drawParticles() {
+  particles.forEach((p, index) => {
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+    p.life--;
+
+    ctx.fillStyle = color;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (p.life <= 0) {
+      particles.splice(index, 1);
+    }
+  });
+}
+
+function bounceEffects() {
+
+  hits++;
+
+  color = randomColor();
+
+  for (let i = 0; i < 15; i++) {
+    particles.push(createParticle(x + 100, y + 20));
+  }
+
+  // SCREEN SHAKE
+  canvas.style.transform =
+    `translate(${Math.random()*12-6}px, ${Math.random()*12-6}px)`;
+
+  setTimeout(() => {
+    canvas.style.transform = "translate(0px, 0px)";
+  }, 50);
+
+  // CHAOS MODE
+  dx *= 1.01;
+  dy *= 1.01;
+}
+
+function update() {
+
+  x += dx;
+  y += dy;
+
+  ctx.font = `${size}px Orbitron`;
+
+  const textWidth = ctx.measureText(text).width;
+
+  if (x + textWidth >= canvas.width || x <= 0) {
+    dx *= -1;
+    bounceEffects();
+  }
+
+  if (y + size >= canvas.height || y <= 0) {
+    dy *= -1;
+    bounceEffects();
+  }
+}
+
+function draw() {
+
+  // TRAIL EFFECT
+  ctx.fillStyle = "rgba(0,0,0,0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = `${size}px Orbitron`;
+
+  // GLOW
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = color;
+
+  ctx.fillStyle = color;
+
+  ctx.fillText(text, x, y);
+
+  ctx.shadowBlur = 0;
+
+  drawParticles();
+
+  // HUD
+  ctx.fillStyle = "white";
+  ctx.font = "22px Orbitron";
+
+  const hitsText = `Hits: ${hits}`;
+  const speedText = `Speed: ${(Math.abs(dx) + Math.abs(dy)).toFixed(1)}`;
+
+  const hitsWidth = ctx.measureText(hitsText).width;
+  const speedWidth = ctx.measureText(speedText).width;
+
+  ctx.fillText(hitsText, canvas.width - hitsWidth - 20, 40);
+  ctx.fillText(speedText, canvas.width - speedWidth - 20, 80);
+}
+
+function loop() {
+
+  update();
+
+  draw();
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+</body>
+</html>

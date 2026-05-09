@@ -86,3 +86,64 @@ button:hover {
   font-size: 30px;
   padding: 20px 40px;
 }
+
+/* Responsive helpers */
+body {
+  padding: 16px;
+}
+
+.container {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.video iframe,
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.video iframe {
+  width: 100%;
+  max-width: 560px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gallery img {
+  width: 150px;
+  max-width: 45vw;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 12px;
+  }
+  .container {
+    gap: 12px;
+  }
+  button {
+    font-size: 18px;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  button {
+    width: 100%;
+    font-size: 18px !important;
+    padding: 14px 20px !important;
+  }
+  .gallery img {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
