@@ -1,94 +1,102 @@
 <html>
 <head>
-   <link rel="stylesheet"  href="style.css">
-
-<title> PIXELCORD5 :O WEBSITE </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
- 
-
-
-
+    <link rel="stylesheet" href="style.css">
+    <title> PIXELCORD5 :O WEBSITE </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1> Pixelcord5's Website :O </h1>
-<p>  Pixelcord5 :O is on a website. </p>
-<h2> click here to see my videos </h2>
-<a href="https://www.youtube.com/channel/UCCAdKVKHxlz0Dh4Zjb1ipCw"><button>Youtube</button></a>
-<h3> Click here to be in my Discord </h3>
-<a href="https://discord.com/channels/1430510066414653513/1430510407361106000"><button>Discord</button></a>
-<h4> .</h4>
+    <h1> Pixelcord5's Website :O </h1>
+    <p> Pixelcord5 :O is on a website. </p>
+    
+    <h2> click here to see my videos </h2>
+    <a href="https://www.youtube.com/channel/UCCAdKVKHxlz0Dh4Zjb1ipCw"><button>Youtube</button></a>
+    
+    <h3> Click here to be in my Discord </h3>
+    <!-- Note: Discord channel links only work if the user is already in the server! -->
+    <a href="https://discord.com/channels/1430510066414653513/1430510407361106000"><button>Discord</button></a>
+    
+    <h4> .</h4>
 
-<div class="container">
-
-    <div class="text">
-        <h5>🎬 My Latest Videos</h5>
+    <div class="container">
+        <div class="text">
+            <h5>🎬 My Latest Videos</h5>
+        </div>
+        <div class="video">
+            <iframe width="560" height="315"
+            src="https://www.youtube.com/embed?listType=playlist&list=UUCAdKVKHxlz0Dh4Zjb1ipCw"
+            frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
-    <div class="video">
-        <iframe width="560" height="315"
-        src="https://www.youtube.com/embed?listType=playlist&list=UUCAdKVKHxlz0Dh4Zjb1ipCw"
-        frameborder="0" allowfullscreen>
-        </iframe>
-    </div>
+    <!-- Navigation Buttons -->
+    <button onclick="window.location.href='Fanart.html'">Pictures/Videos</button>
+    <button onclick="window.location.href='Pixelcord5.html'">Pixelators</button>
+    <button onclick="window.location.href='Social.html'">My Socials</button>
+    <button onclick="window.location.href='shout.html'">Shoutouts</button>
+    <button onclick="window.location.href='Games/spacb.html'">Games</button>
 
-</div>
+    <hr> <!-- Separator -->
 
+    <!-- MEOW SECTION -->
+    <button onclick="playMeow()">Meow</button>
+    <div id="meowText" style="height: 30px; font-weight: bold; color: orange;"></div> <!-- ADDED THIS ELEMENT -->
 
-<button onclick="window.location.href='Fanart.html'">
-    Pictures/Videos
-</button>
-
-<button onclick="window.location.href='Pixelcord5.html'">
-    Pixelators
-</button>
-
-<button onclick="window.location.href='Social.html'">
-   My Socials
-</button>
-
-<button onclick="window.location.href='shout.html'">
-   Shoutouts
-</button>
-
-<button onclick="window.location.href='Games/spacb.html'">
-   Games
-</button>
+    <audio id="meowAudio">
+        <source src="meow.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
 
 
-<button id="musicBtn" onclick="toggleMusic()">▶ Play</button>
+    <!-- MUSIC SECTION -->
+    <button id="musicBtn" onclick="toggleMusic()">▶ Play Music</button>
+    <audio id="bgMusic">
+      <source src="lofi.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="bgMusic">
-  <source src="lofi.mp3" type="audio/mpeg">
-</audio>
+   
+    <!-- QUIT SECTION -->
+    <h3> Quit? </h3>
+    <button class="quit-button" onclick="saveAndQuit()">Save and quit to browser</button>
 
-<script>
-function toggleMusic() {
-  var audio = document.getElementById("bgMusic");
-  var btn = document.getElementById("musicBtn");
+    <!-- ALL SCRIPTS TOGETHER -->
+    <script>
+        // 1. MEOW FUNCTION
+        function playMeow() {
+            const audio = document.getElementById("meowAudio");
+            audio.currentTime = 0; 
+            audio.play();
 
-  if (audio.paused) {
-    audio.play();
-    btn.innerText = "⏸ Pause";
-  } else {
-    audio.pause();
-    btn.innerText = "▶ Play";
-  }
-}
+            const textElement = document.getElementById("meowText");
+            textElement.innerText = "Meow!"; // Show text
 
+            setTimeout(() => {
+                textElement.innerText = ""; // Hide text after 1 second
+            }, 1000);
+        }
 
-</script>
-<p style="position:fixed; bottom:0; width:100%; text-align:center;">
-  Pixelcord5 :O 2026
-</p>
+        // 2. MUSIC FUNCTION
+        function toggleMusic() {
+            var audio = document.getElementById("bgMusic");
+            var btn = document.getElementById("musicBtn");
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "⏸ Pause";
+            } else {
+                audio.pause();
+                btn.innerText = "▶ Play";
+            }
+        }
+
+        // 3. QUIT FUNCTION
+        function saveAndQuit() {
+            
+            window.location.href = "https://www.google.com";
+        }
+    </script>
+
+    <p style="position:fixed; bottom:0; width:100%; text-align:center;">
+      Pixelcord5 :O 2026
+    </p>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

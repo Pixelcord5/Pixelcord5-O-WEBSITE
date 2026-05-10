@@ -41,10 +41,123 @@
       box-shadow: 0 0 15px #ff0044;
       transform: scale(1.05);
     }
+
+    /* WARNING SCREEN */
+
+    #warningScreen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      transition: opacity 1s ease;
+    }
+
+    #warningBox {
+      width: 90%;
+      max-width: 650px;
+      border: 3px solid #ff0044;
+      padding: 35px;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.95);
+      box-shadow: 0 0 30px #ff0044;
+    }
+
+    #warningBox h1 {
+      color: #ff0044;
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    #warningBox p {
+      color: white;
+      line-height: 1.7;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .warning-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .warning-btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Orbitron', monospace;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .understood-btn {
+      background: #00ff99;
+      color: black;
+    }
+
+    .understood-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    .leave-btn {
+      background: #ff0044;
+      color: white;
+    }
+
+    .leave-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #ff0044;
+    }
+
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- WARNING SCREEN -->
+
+<div id="warningScreen">
+
+  <div id="warningBox">
+
+    <h1>⚠ EPILEPSY WARNING ⚠</h1>
+
+    <p>
+      This DVD screen contains flashing colors, fast movement,
+      screen shake effects, glowing lights, and visual effects
+      that may trigger seizures for people with photosensitive epilepsy.
+      <br><br>
+      If you feel uncomfortable, dizzy, or unwell,
+      please leave the page immediately.
+    </p>
+
+    <div class="warning-buttons">
+
+      <button class="warning-btn understood-btn" id="understoodBtn">
+        UNDERSTOOD
+      </button>
+
+      <button class="warning-btn leave-btn"
+        onclick="window.location.href='spacb.html'">
+        GO BACK
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 <button class="back-button" onclick="window.location.href='spacb.html'">
   BACK
@@ -56,11 +169,29 @@
 const canvas = document.getElementById("screen");
 const ctx = canvas.getContext("2d");
 
+const warningScreen = document.getElementById("warningScreen");
+const understoodBtn = document.getElementById("understoodBtn");
+
+let started = false;
+
+understoodBtn.addEventListener("click", () => {
+
+  warningScreen.classList.add("fade-out");
+
+  setTimeout(() => {
+    warningScreen.style.display = "none";
+    started = true;
+    loop();
+  }, 1000);
+
+});
+
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 resize();
+
 window.addEventListener("resize", resize);
 
 const text = "Pixelcord5 :O 2026";
@@ -80,6 +211,7 @@ let hits = 0;
 const particles = [];
 
 function randomColor() {
+
   const r = Math.floor(Math.random() * 255);
   const g = Math.floor(Math.random() * 255);
   const b = Math.floor(Math.random() * 255);
@@ -88,6 +220,7 @@ function randomColor() {
 }
 
 function createParticle(px, py) {
+
   return {
     x: px,
     y: py,
@@ -99,6 +232,7 @@ function createParticle(px, py) {
 }
 
 function drawParticles() {
+
   particles.forEach((p, index) => {
 
     p.x += p.dx;
@@ -115,7 +249,9 @@ function drawParticles() {
     if (p.life <= 0) {
       particles.splice(index, 1);
     }
+
   });
+
 }
 
 function bounceEffects() {
@@ -129,6 +265,7 @@ function bounceEffects() {
   }
 
   // SCREEN SHAKE
+
   canvas.style.transform =
     `translate(${Math.random()*12-6}px, ${Math.random()*12-6}px)`;
 
@@ -136,7 +273,8 @@ function bounceEffects() {
     canvas.style.transform = "translate(0px, 0px)";
   }, 50);
 
-  // CHAOS MODE
+  // SPEED UP
+
   dx *= 1.01;
   dy *= 1.01;
 }
@@ -151,25 +289,32 @@ function update() {
   const textWidth = ctx.measureText(text).width;
 
   if (x + textWidth >= canvas.width || x <= 0) {
+
     dx *= -1;
+
     bounceEffects();
   }
 
   if (y + size >= canvas.height || y <= 0) {
+
     dy *= -1;
+
     bounceEffects();
   }
+
 }
 
 function draw() {
 
   // TRAIL EFFECT
+
   ctx.fillStyle = "rgba(0,0,0,0.08)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.font = `${size}px Orbitron`;
 
   // GLOW
+
   ctx.shadowBlur = 20;
   ctx.shadowColor = color;
 
@@ -182,20 +327,34 @@ function draw() {
   drawParticles();
 
   // HUD
+
   ctx.fillStyle = "white";
   ctx.font = "22px Orbitron";
 
   const hitsText = `Hits: ${hits}`;
-  const speedText = `Speed: ${(Math.abs(dx) + Math.abs(dy)).toFixed(1)}`;
+  const speedText =
+    `Speed: ${(Math.abs(dx) + Math.abs(dy)).toFixed(1)}`;
 
   const hitsWidth = ctx.measureText(hitsText).width;
   const speedWidth = ctx.measureText(speedText).width;
 
-  ctx.fillText(hitsText, canvas.width - hitsWidth - 20, 40);
-  ctx.fillText(speedText, canvas.width - speedWidth - 20, 80);
+  ctx.fillText(
+    hitsText,
+    canvas.width - hitsWidth - 20,
+    40
+  );
+
+  ctx.fillText(
+    speedText,
+    canvas.width - speedWidth - 20,
+    80
+  );
+
 }
 
 function loop() {
+
+  if (!started) return;
 
   update();
 
@@ -203,8 +362,6 @@ function loop() {
 
   requestAnimationFrame(loop);
 }
-
-loop();
 </script>
 
 </body>
