@@ -30,6 +30,9 @@
         </div>
     </div>
 
+    <h2>COLOR CHANGER</h2>
+    <button id="switch">Switch Color</button>   
+
     <!-- Navigation Buttons -->
     <button onclick="window.location.href='Fanart.html'">Pictures/Videos</button>
    <button onclick="window.location.href='Social.html'">My Socials</button>
@@ -84,6 +87,11 @@
                 btn.innerText = "▶ Play";
             }
         }
+
+        document.getElementById('switch').addEventListener('click', () => {
+  const h = Math.floor(Math.random() * 360);
+  document.documentElement.style.setProperty('--pastel-hue', h);
+});   
 
         // 3. QUIT FUNCTION
         function saveAndQuit() {
