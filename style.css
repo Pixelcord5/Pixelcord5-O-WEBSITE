@@ -14,10 +14,15 @@
 }
 
 :root {
-  --pastel-hue: 180; /* Change this value to switch colors */
+  --pastel-hue: 140;
   --pastel-sat: 70%;
-  --pastel-light: 75%; /* High lightness creates the pastel effect */
+  --pastel-light: 85%;
 }
+
+body {
+  background-color: hsl(var(--pastel-hue), var(--pastel-sat), var(--pastel-light));
+  transition: background-color 1s ease;
+}   
 
 body {
   background-color: hsl(var(--pastel-hue), var(--pastel-sat), var(--pastel-light));
